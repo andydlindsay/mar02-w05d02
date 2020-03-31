@@ -71,7 +71,7 @@ And turned them into a relational db:
 ![books and authors ERD](https://raw.githubusercontent.com/andydlindsay/mar02-w05d02/master/mar02-books.png)
 
 ### ERD #2 Spotify
-* Then we make a student suggested ERD for a Spotify clone/competitor:
+* Then we made a student suggested ERD for a Spotify clone/competitor:
 
 ![spotify](https://raw.githubusercontent.com/andydlindsay/mar02-w05d02/master/mar02-spotify.png)
 
