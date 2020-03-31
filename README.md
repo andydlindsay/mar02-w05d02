@@ -1,83 +1,79 @@
 # W5D2 - Database Design
 
 ### To Do
-- [ ] Primary Keys/Foreign Keys
-- [ ] Data Types
-- [ ] Relationship Types
-- [ ] Naming Conventions
-- [ ] Normalization
-- [ ] Design Concepts
-- [ ] Entity Relationship Diagrams
-- [ ] ERD #1: Convert 2 Spreadsheets
-- [ ] ERD #2: Student Suggestion(s)
+- [x] Primary Keys/Foreign Keys
+- [x] Data Types
+- [x] Relationship Types
+- [x] Naming Conventions
+- [x] Normalization
+- [x] Design Concepts
+- [x] Entity Relationship Diagrams
+- [x] ERD #1: Convert 2 Spreadsheets
+- [x] ERD #2: Student Suggestion(s)
 
-### Primary Key/Foreign Keys
-- A PK is a way of uniquely identifying a particular record in a table
-- A PK stored in another table is referred to as a Foreign Key
-- Primary Keys should always be auto-incrementing integers
-- Opinion: PK should have no info about the record that it identifies
-- Composite Keys: two or more fields and turn them into a PK
-- The data type of the FK MUST match the data type of the PK
+### Primary Key
+
+- A way of uniquely identifying a particular record within a table 
+- Must be unique (within the table) and can never be null
+- The usual data type is auto-incrementing integer (`INTEGER` or `BIGINT`)
+- A Primary Key stored in another table is known as a `Foreign Key`
+- The Primary Key and Foreign Key **MUST** be the same data type
 
 ### Data Types
-- Choosing the right/correct data type used to be a massive deal
-- Memory used to equal $$$$$$
-- Memory is cheap
-- Money is a big deal, don't store as a floating point
-- $5.45 === 545 / 100
-- varchar(255), char(255)
+
+- Each field in a table **must** have a data type defined for it
+- The data type tells the database how much room to set aside to store the value _and_ allows the database to perform type validation on data before insertion (to protect the data integrity of the table)
+- Choosing the perfect data type is less of a concern nowadays because memory is now comparably cheap
 
 ### Relationship Types
-- One of three ways:
-  - One-to-one: one record in the 1st table is related to only one record in the 2nd
-  - One-to-many: one record in the 1st table is related to one or more in the 2nd
-  - Many-to-many: many records in the 1st are related to many in the 2nd
-- 1:1 = almost never get used
-- M:M = cannot be represented with two tables (you need another table)
 
-### Naming Conventions (opinion)
-- Table names are lowercase and plural (users, assets)
-- Field names also lowercase and snake_case (first_name)
-- Primary keys should always be `id`
-- Foreign keys should always be singular of table name plus `_id` (user_id)
+- **One-to-One**: One record in the first table is related to one (and only one) record in the second table
+- **One-to-Many**: One record in the first table is related to one or more records in the second table
+- **Many-to-Many**: One or more records in the first table are related to one or more records in the second table
+
+- It could be argued that there is really only one relationship type: _One-to-Many_ as One-to-One's are extremely rare and Many-to-Many's are implemented using two _One-to-Many's_
+
+### Naming Conventions
+
+- Table and field names are written in `snake_case`
+- Table names are always pluralized
+- The primary key for each table will simply be called `id`
+- A foreign key is made up of the singular of the primary keys table and the suffix `_id` (eg. `user_id` is the foreign key for the `id` field in the `users` table)
 
 ### Normalization
-- Is a way of standardizing our data and removing redundant data
-- Single source of truth
-- Calculated fields: full_name, first_name, last_name
-- Beware: you can take normalization too far (too many tables to JOIN)
-- SELECT's denormalize the data
+
+- The process of designing (and redesigning) a relational database to reduce duplicated data
+- This will help to improve the structure of the data
+- Beware: taking this process too far can result in extremely complex queries to retrieve related data
 
 ### Design Concepts
-- Make fields required (and unique)
-- Make required based on the initial save state of the record
-- Intelligent default values (created_at)
-- Never delete anything (DELETE) record retention periods
-- `active` boolean (default to true)
-- Pull repeated values out to a lookup table (vancouver, vancvoue, vancity, van!)
-- Never trust your users
-- Consider using a `type` field for tables that have most of the same records
 
-### ERD's
-- Entity Relationship Diagrams
-- 
+- Make fields required based on the records state upon initial creation (remember that additional data can be added to a record after it has been created)
+- Intelligent default values can be set for fields (such as the current timestamp for a `created_on` field)
+- Don't use calculated fields (a field that can be derived from one or more other fields, such as `full_name` is a combination of `first_name` and `last_name`)
+- Pull repeated values out to their own table and make reference to them with a foreign key
+- Try not to delete anything (use a boolean flag instead to mark a record as active or inactive)
+- Consider using a `type` field instead of using two (or more) tables to store very similar data (eg. create an `orders` table with an `order_type` field instead of a `purchase_orders` and a `sales_orders` table)
 
+### Entity Relationship Diagram (ERD)
 
+- A visual depiction of the database tables and how they are related to each other
+- Extremely useful for reasoning about how the database should be structured
+- Can be created using pen and paper, a whiteboard, or using an online application
 
+### ERD #1 Convert 2 Spreadsheets
+We started with these two spreadsheets:
 
+![Two Spreadsheets](https://andydlindsay-portfolio.s3.amazonaws.com/lighthouse/bookAndAuthorsTables.png)
 
+And turned them into a relational db:
 
+![books and authors ERD](https://raw.githubusercontent.com/andydlindsay/mar02-w05d02/master/mar02-books.png)
 
+### ERD #2 Spotify
+* Then we make a student suggested ERD for a Spotify clone/competitor:
 
-
-
-
-
-
-
-
-
-
+![spotify](https://raw.githubusercontent.com/andydlindsay/mar02-w05d02/master/mar02-spotify.png)
 
 ### Useful Links
 * [Database Normalization](https://en.wikipedia.org/wiki/Database_normalization)
